@@ -3,99 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>San Valentín 💖</title>
+<title>Para mi reina Naomi 💖</title>
 
 <style>
-    body{
-        margin:0;
-        padding:0;
-        background:linear-gradient(135deg,#ff4e9b,#ff9ad5);
-        font-family:Arial, Helvetica, sans-serif;
-        text-align:center;
-        color:white;
-        overflow:hidden;
-    }
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color:white;
+    overflow-x:hidden;
+}
 
-    .container{
-        margin-top:80px;
-        padding:20px;
-    }
+h1{
+    margin-top:30px;
+    font-size:2.3em;
+}
 
-    h1{
-        font-size:28px;
-    }
+button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:10px;
+    transition: all 0.3s ease;
+}
 
-    button{
-        padding:12px 25px;
-        font-size:18px;
-        border:none;
-        border-radius:20px;
-        margin:20px;
-        cursor:pointer;
-        transition:0.3s;
-    }
+#yes{
+    background:white;
+    color:#ff4d6d;
+}
 
-    #yesBtn{
-        background:white;
-        color:#ff4e9b;
-    }
+#no{
+    background:#ff4d6d;
+    color:white;
+}
 
-    #noBtn{
-        background:#ff1e6c;
-        color:white;
-        position:absolute;
-    }
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:20px;
+}
 
-    img{
-        width:220px;
-        border-radius:20px;
-        margin-top:25px;
-        box-shadow:0 0 20px white;
-    }
+.gallery img{
+    width:180px;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    margin:10px;
+    box-shadow:0 0 15px rgba(255,255,255,0.8);
+    transition:0.4s;
+}
 
-    .heart{
-        position:fixed;
-        top:-10px;
-        font-size:24px;
-        animation:fall linear forwards;
-    }
+.gallery img:hover{
+    transform:scale(1.05);
+}
 
-    @keyframes fall{
-        to{
-            transform:translateY(100vh);
-            opacity:0;
-        }
-    }
+.heart{
+    position:fixed;
+    font-size:20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall{
+    0%{ transform:translateY(-10vh); opacity:1;}
+    100%{ transform:translateY(110vh); opacity:0;}
+}
+
+/* ✨ EFECTO ESPECIAL FOTO FINAL */
+.final-photo{
+    width:260px;
+    border-radius:25px;
+    margin-top:35px;
+    animation: aparecer 1.5s ease forwards, brillo 2s infinite alternate;
+    opacity:0;
+}
+
+@keyframes aparecer{
+    to{ opacity:1; transform:scale(1); }
+    from{ opacity:0; transform:scale(0.8); }
+}
+
+@keyframes brillo{
+    from{ box-shadow:0 0 15px white; }
+    to{ box-shadow:0 0 35px #fff, 0 0 60px #ffb3d9; }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>¿Quieres ser mi San Valentín? 💖</h1>
-    <button id="yesBtn">Sí 💘</button>
-    <button id="noBtn">No 😢</button>
-    <br>
+<h1>Naomi, mi reina 👑✨</h1>
+<p>Desde el 14 de febrero de 2025 empezó mi mejor historia 🥺💞</p>
+<h2>¿Quieres ser mi San Valentín? 💘</h2>
+
+<p id="contador"></p>
+
+<div>
+    <button id="yes">¡Sí quiero! 💖</button>
+    <button id="no">No 😢</button>
+</div>
+
+<p id="mensajeNo" style="margin-top:15px; font-size:18px;"></p>
+
+<div class="gallery">
     <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+    <img src="foto4.jpg">
 </div>
 
 <script>
+// CONTADOR
+let inicio = new Date("2025-02-14T00:00:00");
 
-let noBtn = document.getElementById("noBtn");
-let yesBtn = document.getElementById("yesBtn");
+function actualizarContador(){
+    let ahora = new Date();
+    let diferencia = ahora - inicio;
 
-noBtn.addEventListener("mouseover", function(){
-    noBtn.style.top = Math.random()*80 + "vh";
-    noBtn.style.left = Math.random()*80 + "vw";
+    let dias = Math.floor(diferencia / (1000*60*60*24));
+    let horas = Math.floor((diferencia / (1000*60*60)) % 24);
+    let minutos = Math.floor((diferencia / (1000*60)) % 60);
+
+    document.getElementById("contador").innerHTML =
+        `Llevamos ${dias} días, ${horas} horas y ${minutos} minutos juntos 💕`;
+}
+
+setInterval(actualizarContador,1000);
+actualizarContador();
+
+
+// BOTONES
+let yesBtn = document.getElementById("yes");
+let noBtn = document.getElementById("no");
+let mensaje = document.getElementById("mensajeNo");
+
+let size = 1;
+let intentos = 0;
+
+let frases = [
+    "¿Segura que no quieres? 🥺",
+    "Di que sí amor 😭",
+    "Yo sé que quieres mi vida 😘",
+    "No seas así mi reina 👑",
+    "Prometo darte más besitos 💋",
+    "Ya casi no tienes opción 😈",
+    "El destino quiere que digas que sí 💘"
+];
+
+noBtn.addEventListener("click", function(){
+
+    mensaje.textContent = frases[intentos % frases.length];
+
+    size += 0.4;
+    yesBtn.style.transform = `scale(${size})`;
+
+    noBtn.style.transform = `scale(${1 - intentos * 0.1})`;
+
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 50);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    intentos++;
+
+    if(intentos >= 6){
+        noBtn.style.display = "none";
+        mensaje.textContent = "Sabía que no podías resistirte 😏💖";
+    }
+
 });
 
 yesBtn.addEventListener("click", function(){
     document.body.innerHTML = `
-        <div style="text-align:center; margin-top:40px; padding:25px; max-width:800px; margin-left:auto; margin-right:auto;">
-            
-            <h1 style="font-size:30px;">💘 Feliz San Valentín, mi reina 👑💖</h1>
+        <div style="text-align:center; margin-top:40px; max-width:900px; margin-left:auto; margin-right:auto; padding:20px;">
+            <h1>Sabía que dirías que sí, mi reina 👑💖</h1>
+            <p style="font-size:22px;">Te amo muchísimo Naomi ✨</p>
+            <h2>💘 Feliz San Valentín 💘</h2>
+            <p style="margin-top:20px;">Desde el 14/02/2025 y por muchos años más 💞</p>
 
-            <p style="font-size:20px; margin-top:25px; line-height:1.6;">
+            <p style="font-size:20px; margin-top:30px; line-height:1.6;">
                 Gracias por aceptar ser mi San Valentín mi vida, y no solo eso, también te doy gracias por estar siempre a mi lado a pesar de las circunstancias.
             </p>
 
@@ -115,17 +208,12 @@ yesBtn.addEventListener("click", function(){
                 Eres y siempre serás mi niña preciosa, mi novia, mi mujer, mi reina, mi todooo 💗 TEAMOOO 💖
             </p>
 
-            <img src="foto3.jpg" style="
-                width:260px;
-                border-radius:20px;
-                margin-top:30px;
-                box-shadow:0 0 25px white;
-            ">
+            <img src="foto3.jpg" class="final-photo">
         </div>
     `;
 
-    // Lluvia de corazones
-    for(let i=0;i<40;i++){
+    // Explosión de corazones
+    for(let i=0;i<30;i++){
         let heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML="💖";
@@ -134,7 +222,6 @@ yesBtn.addEventListener("click", function(){
         document.body.appendChild(heart);
     }
 });
-
 </script>
 
 </body>
