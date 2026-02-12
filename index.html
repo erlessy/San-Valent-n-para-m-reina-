@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi reina Naomi 💖</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color:white;
+    overflow-x:hidden;
+}
+
+h1{
+    margin-top:30px;
+    font-size:2.3em;
+}
+
+button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+#yes{
+    background:white;
+    color:#ff4d6d;
+}
+
+#no{
+    background:#ff4d6d;
+    color:white;
+    position:absolute;
+}
+
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.gallery img{
+    width:180px;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    margin:10px;
+    box-shadow:0 0 15px rgba(255,255,255,0.8);
+    transition:0.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+.cat{
+    position:fixed;
+    width:70px;
+    animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%{transform: translateY(0px);}
+    50%{transform: translateY(-20px);}
+    100%{transform: translateY(0px);}
+}
+
+.heart{
+    position:fixed;
+    animation: fall linear infinite;
+}
+
+@keyframes fall{
+    0%{transform: translateY(-10vh);}
+    100%{transform: translateY(110vh);}
+}
+
+#contador{
+    font-size:1.2em;
+    margin:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Naomi, mi reina 👑💖</h1>
+<p>Desde el 14 de febrero de 2025 empezó mi mejor historia 🥺💕</p>
+
+<h2>¿Quieres ser mi San Valentín? 💘</h2>
+
+<div id="contador"></div>
+
+<button id="yes" onclick="respuestaSi()">¡Sí quiero! 💖</button>
+<button id="no" onmouseover="moverBoton()">No 😢</button>
+
+<div class="gallery">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+    <img src="foto4.jpg">
+</div>
+
+<img src="https://placekitten.com/100/100" class="cat" style="top:10%; left:5%;">
+<img src="https://placekitten.com/101/100" class="cat" style="top:70%; left:85%;">
+
+<script>
+
+// Contador exacto desde 14/02/2025
+const fechaInicio = new Date("2025-02-14T00:00:00");
+const contador = document.getElementById("contador");
+
+function actualizarContador(){
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+
+    const dias = Math.floor(diferencia / (1000*60*60*24));
+    const horas = Math.floor((diferencia / (1000*60*60)) % 24);
+    const minutos = Math.floor((diferencia / (1000*60)) % 60);
+
+    contador.innerHTML = `Llevamos ${dias} días, ${horas} horas y ${minutos} minutos juntos 💕`;
+}
+
+setInterval(actualizarContador,1000);
+actualizarContador();
+
+// Botón que huye
+function moverBoton(){
+    const boton = document.getElementById("no");
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    boton.style.left = x + "px";
+    boton.style.top = y + "px";
+}
+
+// Pantalla final
+function respuestaSi(){
+    document.body.innerHTML = `
+        <h1>Sabía que dirías que sí, mi reina 👑😍</h1>
+        <h2>Te amo infinito Naomi 💖</h2>
+        <p>Gracias por estos días tan hermosos a tu lado 🥺💕</p>
+        <h3>Siempre tú y yo 🐱💘</h3>
+    `;
+}
+
+// Corazones cayendo
+function crearCorazon(){
+    const corazon = document.createElement("div");
+    corazon.classList.add("heart");
+    corazon.innerHTML = "💖";
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.fontSize = (Math.random() * 20 + 20) + "px";
+    corazon.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(corazon);
+
+    setTimeout(()=>{
+        corazon.remove();
+    },5000);
+}
+
+setInterval(crearCorazon,300);
+
+</script>
+
+</body>
+</html>
