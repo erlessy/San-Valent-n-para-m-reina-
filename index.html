@@ -162,22 +162,49 @@ noBtn.addEventListener("click", function(){
 
 yesBtn.addEventListener("click", function(){
     document.body.innerHTML = `
-        <div style="text-align:center; margin-top:40px;">
-            <h1>Sabía que dirías que sí, mi reina 👑💖</h1>
-            <p style="font-size:22px;">Te amo muchísimo Naomi ✨</p>
-            <h2>💘 Feliz San Valentín 💘</h2>
-            <p style="margin-top:20px;">Desde el 14/02/2025 y por muchos años más 💞</p>
+        <div style="text-align:center; margin-top:40px; padding:25px; max-width:800px; margin-left:auto; margin-right:auto;">
+            
+            <h1 style="font-size:30px;">💘 Feliz San Valentín, mi reina 👑💖</h1>
+
+            <p style="font-size:20px; margin-top:25px; line-height:1.6;">
+                Gracias por aceptar ser mi San Valentín mi vida, y no solo eso, también te doy gracias por estar siempre a mi lado a pesar de las circunstancias.
+            </p>
+
+            <p style="font-size:20px; line-height:1.6;">
+                Este San Valentín será un día muy especial para ambos, porque compartiremos juntos un momento lindo más en nuestras vidas que siempre quedará grabado en nosotros y celebraremos nuestro primer añito juntos de relación.
+            </p>
+
+            <p style="font-size:20px; line-height:1.6;">
+                Te amo mucho mi reina 💗💗💗.
+            </p>
+
+            <p style="font-size:20px; line-height:1.6;">
+                Adoro pasar cada día junto a ti, aprecio mucho todo el cariño y lo lindo que me das. Todo este tiempo he sido muy feliz a tu lado.
+            </p>
+
+            <p style="font-size:22px; font-weight:bold; margin-top:20px;">
+                Eres y siempre serás mi niña preciosa, mi novia, mi mujer, mi reina, mi todooo 💗 TEAMOOO 💖
+            </p>
+
+            <img src="foto3.jpg" style="
+                width:260px;
+                border-radius:20px;
+                margin-top:30px;
+                box-shadow:0 0 25px white;
+            ">
         </div>
     `;
 
     // Explosión de corazones
-    for(let i=0;i<30;i++){
+    for(let i=0;i<40;i++){
         let heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML="💖";
         heart.style.left = Math.random()*100 + "vw";
         heart.style.animationDuration = (Math.random()*3+2)+"s";
         document.body.appendChild(heart);
+    }
+});
     }
 });
 </script>
